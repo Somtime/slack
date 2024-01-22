@@ -16,6 +16,7 @@ import { Mentions } from './entities/Mentions';
 import { Users } from './entities/Users';
 import { WorkspaceMembers } from './entities/WorkspaceMembers';
 import { Workspaces } from './entities/Workspaces';
+import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 
 @Module({
   imports: [
@@ -46,7 +47,7 @@ import { Workspaces } from './entities/Workspaces';
       migrations: [__dirname + '/migrations/*.ts'],
       charset: 'utf8mb4',
       synchronize: false,
-      logging: true,
+      logging: false,
     }),
   ],
   controllers: [AppController],

@@ -17,6 +17,7 @@ import { DMs } from './DMs';
 import { Mentions } from './Mentions';
 import { WorkspaceMembers } from './WorkspaceMembers';
 import { Workspaces } from './Workspaces';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 @Index('email', ['email'], { unique: true })
 @Entity({ schema: process.env.DB_DATABASE, name: 'users' })
@@ -25,12 +26,18 @@ export class Users {
   id: number;
 
   @Column('varchar', { name: 'email', unique: true, length: 30 })
+  @IsNotEmpty()
+  @IsString()
   email: string;
 
   @Column('varchar', { name: 'nickname', length: 30 })
+  @IsNotEmpty()
+  @IsString()
   nickname: string;
 
   @Column('varchar', { name: 'password', length: 100, select: false })
+  @IsNotEmpty()
+  @IsString()
   password: string;
 
   @CreateDateColumn()
