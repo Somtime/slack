@@ -16,11 +16,12 @@ import { Mentions } from './entities/Mentions';
 import { Users } from './entities/Users';
 import { WorkspaceMembers } from './entities/WorkspaceMembers';
 import { Workspaces } from './entities/Workspaces';
-import { HttpExceptionFilter } from './exceptions/http-exception.filter';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    AuthModule,
     UsersModule,
     DmsModule,
     ChannelsModule,

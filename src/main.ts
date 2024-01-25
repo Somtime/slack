@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 import { ValidationPipe } from '@nestjs/common';
+import passport from 'passport';
+import * as session from 'express-session';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -20,6 +22,9 @@ async function bootstrap() {
 
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalPipes(new ValidationPipe());
+
+  console.log(passport);
+  app.use(session({ secret: 'secret' }));
 
   await app.listen(port);
 }
