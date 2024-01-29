@@ -11,7 +11,7 @@ export class UsersService {
     private usersRepository: Repository<Users>,
   ) {}
 
-  async postUsers(email: string, nickname: string, password: string) {
+  async join(email: string, nickname: string, password: string) {
     const user = await this.usersRepository.findOne({
       where: {
         email,
@@ -21,13 +21,13 @@ export class UsersService {
     if (user) throw new UnauthorizedException('이미 존재하는 사용자입니다.');
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    await this.usersRepository.save({
+    const returned = await this.usersRepository.save({
       email,
       nickname,
       password: hashedPassword,
     });
 
-    return true;
+    return returned;
   }
 
   async findByEmail(email: string) {
