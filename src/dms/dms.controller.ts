@@ -1,44 +1,40 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
-import { DmsService } from './dms.service';
-import { CreateDmDto } from './dto/create-dm.dto';
-import { UpdateDmDto } from './dto/update-dm.dto';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('DM')
 @Controller('api/workspaces/:url/dms')
 export class DmsController {
-  constructor(private readonly dmsService: DmsService) {}
-
   @ApiParam({
     name: 'url',
-    description: '워크스페이스 url',
     required: true,
+    description: '워크스페이스 url',
   })
   @ApiParam({
     name: 'id',
-    description: '사용자 아이디',
     required: true,
+    description: '사용자 아이디',
   })
   @ApiQuery({
     name: 'perPage',
-    description: '한 번에 가져오는 개수',
     required: true,
+    description: '한 번에 가져오는 개수',
   })
   @ApiQuery({
     name: 'page',
-    description: '불러올 페이지',
     required: true,
+    description: '불러올 페이지',
   })
   @Get(':id/chats')
-  getChat(@Param() param, @Query() query) {
-    const url = param.url;
-    const id = param.id;
-
-    const perPage = query.perPage;
-    const page = query.page;
-
-    console.log(url, id, perPage, page);
+  getChat(@Query() query, @Param() param) {
+    console.log(query.perPage, query.page);
+    console.log(param.id, param.url);
   }
+
+  // @Get(':id/chats')
+  // getChat(@Query('perPage') perPage, @Query('page') page, @Param('url') url, @Param('id') id) {
+  //   console.log(perPage, page);
+  //   console.log(url, id)
+  // }
 
   @Post(':id/chats')
   postChat(@Body() body) {}
