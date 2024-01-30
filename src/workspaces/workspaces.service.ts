@@ -114,9 +114,8 @@ export class WorkspacesService {
       },
     });
     const user = await this.usersRepository.findOne({ where: { email } });
-    if (!user) {
-      return null;
-    }
+    if (!user) return null;
+
     const workspaceMember = new WorkspaceMembers();
     workspaceMember.WorkspaceId = workspace.id;
     workspaceMember.UserId = user.id;

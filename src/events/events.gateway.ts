@@ -13,13 +13,12 @@ import { onlineMap } from './onlineMap';
 
 @WebSocketGateway({ namespace: /\/ws-.+/ })
 export class EventsGateway
-  implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
+  implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
+{
   @WebSocketServer() public server: Server;
 
   @SubscribeMessage('test')
-  handleTest(@MessageBody() data: string) {
-    console.log('test', data);
-  }
+  handleTest(@MessageBody() data: string) {}
 
   @SubscribeMessage('login')
   handleLogin(

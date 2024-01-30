@@ -1,4 +1,8 @@
-import { HttpException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  HttpException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from 'src/entities/Users';
 import { DataSource, Repository } from 'typeorm';
@@ -68,8 +72,6 @@ export class UsersService {
       },
       select: ['id', 'email', 'nickname', 'password'],
     });
-
-    console.log('user', user);
 
     if (!user) throw new UnauthorizedException();
 

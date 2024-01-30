@@ -22,7 +22,7 @@ export class ChannelsService {
     @InjectRepository(Users)
     private usersRepository: Repository<Users>,
     private readonly eventsGateway: EventsGateway,
-  ) {}
+  ) { }
 
   async findById(id: number) {
     return this.channelsRepository.findOne({ where: { id } });
@@ -115,7 +115,7 @@ export class ChannelsService {
     perPage: number,
     page: number,
   ) {
-    return this.channelChatsRepository
+    const result = await this.channelChatsRepository
       .createQueryBuilder('channelChats')
       .innerJoin('channelChats.Channel', 'channel', 'channel.name = :name', {
         name,
@@ -128,6 +128,8 @@ export class ChannelsService {
       .take(perPage)
       .skip(perPage * (page - 1))
       .getMany();
+
+    return result;
   }
 
   async createWorkspaceChannelChats(
@@ -152,6 +154,7 @@ export class ChannelsService {
       where: { id: savedChat.id },
       relations: ['User', 'Channel'],
     });
+    console.log('chatWithUser', chatWithUser);
     this.eventsGateway.server
       // .of(`/ws-${url}`)
       .to(`/ws-${url}-${chatWithUser.ChannelId}`)

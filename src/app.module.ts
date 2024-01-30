@@ -17,6 +17,7 @@ import { Users } from './entities/Users';
 import { WorkspaceMembers } from './entities/WorkspaceMembers';
 import { Workspaces } from './entities/Workspaces';
 import { AuthModule } from './auth/auth.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { AuthModule } from './auth/auth.module';
     DmsModule,
     ChannelsModule,
     WorkspacesModule,
+    EventsModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: '127.0.0.1',
